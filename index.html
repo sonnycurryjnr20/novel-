@@ -187,6 +187,8 @@
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="romance">Romance</button>
     <button class="filter-btn" data-filter="normal">Normal</button>
+    <!-- NEW MOVIES FILTER -->
+    <button class="filter-btn" data-filter="movies">Movies</button>
   </div>
 </header>
 
@@ -270,7 +272,6 @@ listenBtn.addEventListener('click', () => {
 });
 
 // --- HELPER FUNCTION FOR MASSIVE NOVELS ---
-// This generates the chapter structure automatically so the code stays small enough to paste!
 function createLongStory(id, title, author, category, totalChapters, firstChapterText) {
   const chapters = [];
   for (let i = 1; i <= totalChapters; i++) {
@@ -284,7 +285,87 @@ function createLongStory(id, title, author, category, totalChapters, firstChapte
 
 // --- STORY DATA ---
 const stories = [
-  // --- THE 4 NEW MASSIVE NOVELS ---
+  // --- MOVIE NOVELIZATIONS ---
+  createLongStory(
+    "cinderella",
+    "Cinderella",
+    "Disney",
+    "movies",
+    10,
+    `Once upon a time, in a faraway kingdom, there lived a kind and gentle girl named Ella. She lived in a beautiful manor with her loving parents. But tragedy struck, and soon, Ella was left in the care of her cruel stepmother and two jealous stepsisters.
+
+They stripped her of her fine clothes, forced her to work day and night, and covered her in ashes. They mocked her and called her Cinderella.
+
+But Cinderella never lost her kindness. She kept a small, brave mouse named Gus as her friend and dreamed of a life beyond the dusty attic.
+
+One day, the King announced a grand ball at the palace. Every eligible maiden in the land was invited, including Cinderella. But her stepmother forbade her to go, tearing her mother's old dress to shreds. 
+
+Heartbroken, Cinderella ran to the garden, crying. Suddenly, the air shimmered with golden light. A beautiful woman appeared, surrounded by sparkles. 
+
+"I am your Fairy Godmother," she said softly. "And you, my dear, shall go to the ball."`
+  ),
+  createLongStory(
+    "frozen",
+    "Frozen",
+    "Disney",
+    "movies",
+    12,
+    `The kingdom of Arendelle was a place of fjords, mountains, and deep, icy secrets. Princess Elsa possessed a magical power—the ability to create ice and snow with a single touch. But as a child, she accidentally hurt her younger sister, Anna. 
+
+Fearing her powers, their parents locked the castle gates. Elsa isolated herself, wearing gloves to hide her magic, while Anna grew up lonely, not remembering why her sister pushed her away.
+
+Years later, on the day of Elsa's coronation, the castle gates were finally opened. Anna was thrilled, dreaming of finding true love. But during a heated argument, Elsa's emotions got the best of her. She accidentally unleashed a frozen spell, plunging the entire kingdom into an eternal winter.
+
+Terrified of what she had done, Elsa fled to the North Mountain. Anna, determined to save her sister and the kingdom, set off into the blizzard with a rugged ice harvester named Kristoff and his loyal reindeer, Sven.`
+  ),
+  createLongStory(
+    "moana",
+    "Moana",
+    "Disney",
+    "movies",
+    15,
+    `The ocean was always calling to Moana. From the moment she was a toddler, the water seemed to part for her, inviting her in. But her father, the Chief of the island of Motunui, forbade anyone from sailing beyond the reef. The ocean was dangerous, he said.
+
+Moana grew up learning the ways of her people, but her heart ached for the horizon. Then, the island began to die. The fish disappeared, the coconuts turned black, and the lush vegetation wilted.
+
+Moana discovered a dark secret: long ago, the demigod Maui stole the heart of Te Fiti, the goddess of life. Without it, a slow death was spreading across the ocean. 
+
+Guided by her eccentric grandmother, Moana learned that the ocean had chosen her. She packed a canoe, set sail past the reef, and embarked on a daring journey to find Maui, return the heart, and save her people.`
+  ),
+  createLongStory(
+    "the-incredibles",
+    "The Incredibles",
+    "Disney/Pixar",
+    "movies",
+    10,
+    `In a world where superheroes were once celebrated, they are now forced into hiding. After a series of lawsuits ruined their reputation, the government initiated the Superhero Relocation Program. 
+
+Bob Parr, formerly known as the powerful Mr. Incredible, now works a boring desk job at an insurance company. His wife, Helen (formerly Elastigirl), stays at home to raise their three children: Violet, who can turn invisible; Dash, who is impossibly fast; and baby Jack-Jack.
+
+Bob misses the glory days. He sneaks out with his friend Lucius (Frozone) to fight crime in secret, disobeying the law. 
+
+One day, Bob receives a mysterious message from a woman named Mirage. She offers him a secret, high-paying job on a remote island. But when Bob arrives, he discovers a dangerous plot orchestrated by an old, resentful fan. Now, the Parr family must come out of hiding and learn to fight together.`
+  ),
+  createLongStory(
+    "paw-patrol",
+    "Paw Patrol",
+    "Nickelodeon",
+    "movies",
+    8,
+    `In the bustling town of Adventure Bay, there was always someone who needed help. Whether it was a kitten stuck in a tree or a train stuck on a broken bridge, the citizens knew exactly who to call: The Paw Patrol.
+
+Led by a ten-year-old boy named Ryder, the Paw Patrol was a team of search-and-rescue dogs, each with a unique job and a high-tech vehicle. 
+
+Chase was the police pup, Marshall was the clumsy but brave fire pup, Skye flew the helicopter, Rubble drove the bulldozer, Rocky recycled, and Zuma handled the water rescues.
+
+But today, a massive storm was brewing on the horizon. The Mayor called Ryder with an emergency: the Adventure Bay lighthouse was struck by lightning, and the beacon was broken. Without the light, ships would crash into the rocky shores at night! 
+
+"Ryder, we need to fix the lighthouse!" Chase barked. 
+
+"No job is too big, no pup is too small!" Ryder declared. "Paw Patrol, to the Lookout!"`
+  ),
+
+  // --- EXISTING MASSIVE NOVELS ---
   createLongStory(
     "the-ceos-secret",
     "The CEO's Secret",
@@ -353,173 +434,56 @@ Maya stared at the tickets. "Kofi... this costs a fortune. How did you..."
 
 "I'd do anything for you, Maya. Anything."`
   ),
+  createLongStory(
+    "whispers-of-the-past",
+    "Whispers of the Past",
+    "Anonymous",
+    "romance",
+    35,
+    `Efua had always felt like a ghost in her own life. When she moved back to her grandmother's old house in the village, she expected peace and quiet. Instead, she found a hidden diary in the attic. 
 
-  // --- EXISTING SHORT STORIES ---
-  {
-    id: "the-library-lights",
-    title: "Library Lights",
-    author: "Anonymous",
-    category: "romance",
-    chapters: [
-      { title: "Chapter 1: The Storm", content: `The SHS library was supposed to close at 6:00 PM, but the storm outside had other plans. The rain battered against the high windows, trapping Kofi and Amara inside with nothing but the hum of the old air conditioner and the smell of dusty textbooks.` },
-      { title: "Chapter 2: The Dark", content: `A sudden crack of thunder shook the building. The fluorescent lights above them flickered violently, and then everything went pitch black. Amara let out a small gasp. "Hey, it's okay," Kofi said, his voice suddenly closer.` },
-      { title: "Chapter 3: The Confession", content: `"Actually," Kofi murmured, looking away from the book and directly into her eyes, "I've been trying to find the courage to talk to you outside of class for weeks. So maybe... this storm is a good thing."` }
-    ]
-  },
-  {
-    id: "the-silent-student",
-    title: "The Silent Student",
-    author: "Anonymous",
-    category: "normal",
-    chapters: [
-      { title: "Chapter 1: The Rumor", content: `There was a rumor going around Form 3 Science that the new student, Ekow, hadn't spoken a single word since he transferred two weeks ago. Kwame didn't believe in rumors.` },
-      { title: "Chapter 2: The Drop", content: `The teacher had stepped out of the classroom. Kwame accidentally knocked his beaker off the edge of the desk. Before he could even flinch, a hand shot out and caught the beaker an inch from the ground. It was Ekow.` },
-      { title: "Chapter 3: The Map", content: `Ekow pushed his own notebook across the desk. Kwame looked down at the page. It wasn't chemistry notes. It was a detailed map of the school's underground drainage system, covered in red ink.` }
-    ]
-  },
-  {
-    id: "the-chemistry-partner",
-    title: "The Chemistry Partner",
-    author: "Anonymous",
-    category: "romance",
-    chapters: [
-      { title: "Chapter 1: The Pairing", content: `"You have got to be kidding me," Nana muttered under her breath. The teacher had just announced the partners for the end-of-term science project, and she had been paired with Daniel.` },
-      { title: "Chapter 2: The Lab", content: `On the fourth day, things went wrong. Nana was trying to mix a solution of copper sulfate, but her hands were shaking. "You're adding it too fast," Daniel said suddenly, breaking his silence.` },
-      { title: "Chapter 3: The Dance", content: `"Slow down," he said softly, his face inches from hers. "Chemistry is like a dance. You have to let the chemicals react at their own pace. You can't force it."` }
-    ]
-  },
-  {
-    id: "the-midnight-whispers",
-    title: "The Midnight Whispers",
-    author: "Anonymous",
-    category: "normal",
-    chapters: [
-      { title: "Chapter 1: The Tapping", content: `In every SHS boarding house, there are rules. But at exactly 12:00 AM, Ama heard the whisper. She sat up in her bunk bed, holding her breath. It wasn't a dream.` },
-      { title: "Chapter 2: The Note", content: `Ama slipped out of bed and tiptoed across the cold tile floor. A slip of paper slid under the dormitory door. Her hands were trembling. It read: Look under the third bed.` },
-      { title: "Chapter 3: The Key", content: `She reached her hand into the shadows. Her fingers brushed against something cold and metallic. She pulled it out. It was a rusted, old key with a tag attached to it. The tag read: The Headmaster's Office.` }
-    ]
-  },
-  {
-    id: "the-sports-day-bet",
-    title: "The Sports Day Bet",
-    author: "Anonymous",
-    category: "romance",
-    chapters: [
-      { title: "Chapter 1: The Bet", content: `Everyone at St. Jude's SHS knew that the Inter-House Sports Day was the biggest event of the year. But for Kwesi and Adjoa, it was personal. "I'm going to leave you in the dust tomorrow, Kwesi," Adjoa teased.` },
-      { title: "Chapter 2: The Fall", content: `They ran like the wind. They were neck and neck, the crowd roaring around them. But then, disaster struck. Adjoa stepped on a loose stone and her ankle twisted.` },
-      { title: "Chapter 3: The Finish Line", content: `Kwesi heard the gasp of the crowd. He was only 20 meters from the finish line. But he stopped. He turned around, ran back to Adjoa, and knelt beside her. "Come on. We're finishing this together."` }
-    ]
-  },
-  {
-    id: "the-missing-exam",
-    title: "The Missing Exam",
-    author: "Anonymous",
-    category: "normal",
-    chapters: [
-      { title: "Chapter 1: The Chaos", content: `It was Monday morning, and the atmosphere in the SHS campus was chaotic. The Government exam papers for Form 3 had disappeared from the staff room.` },
-      { title: "Chapter 2: The Janitor", content: `Akosua, the school's quietest and most observant student, noticed something the teachers didn't. She saw the school's janitor, Mr. Osei, acting strangely near the dumpsters.` },
-      { title: "Chapter 3: The Ransom", content: `She reached in and pulled out a thick envelope. It was the missing exam papers. But there was something else attached to them—a small, crumpled note. It read: Bring 5,000 Cedi to the old clock tower at noon.` }
-    ]
-  },
-  {
-    id: "the-bus-stop-rain",
-    title: "The Bus Stop Rain",
-    author: "Anonymous",
-    category: "romance",
-    chapters: [
-      { title: "Chapter 1: The Rain", content: `The rain came down in heavy, unforgiving sheets. Yaa stood under the rusty roof of the bus stop outside the school gates, hugging her heavy textbooks to her chest.` },
-      { title: "Chapter 2: The Car", content: `A sleek, black car pulled up to the curb. The window rolled down, revealing Kojo, the rich kid from the science block. "Yaa, right?" Kojo called out. "Get in. You're going to catch pneumonia."` },
-      { title: "Chapter 3: The Drive", content: `She sighed and slid into the car. As they drove, the silence in the car was surprisingly comfortable. "Why are you being so nice to me?" Yaa asked. "You don't even talk to me in class."` }
-    ]
-  },
-  {
-    id: "the-haunted-lab",
-    title: "The Haunted Lab",
-    author: "Anonymous",
-    category: "normal",
-    chapters: [
-      { title: "Chapter 1: The Dark", content: `The science lab at night was the creepiest place on campus. Kojo, Mensah, and Fiifi were supposed to be studying for their biology practicals, but they had gotten distracted.` },
-      { title: "Chapter 2: The Lock", content: `"Don't be stupid," Kojo scoffed. Suddenly, the heavy metal door of the lab slammed shut. Kojo ran to the door and pushed against it, but it wouldn't budge. "It's locked!" he shouted.` },
-      { title: "Chapter 3: The Secret", content: `A light flickered on in the supply closet. The door slowly creaked open. Out stepped a tall, dark figure holding a mop. The boys screamed. "Hey, calm down!" the figure shouted. It was the night watchman.` }
-    ]
-  },
-  {
-    id: "the-cafeteria-table",
-    title: "The Cafeteria Table",
-    author: "Anonymous",
-    category: "romance",
-    chapters: [
-      { title: "Chapter 1: The Rule", content: `In the SHS cafeteria, there was an unspoken rule: the tables were strictly divided. The quiet kids like Efua sat in the far back corner. Efua liked the back corner.` },
-      { title: "Chapter 2: The Captain", content: `But today, a tray slammed down on the table directly across from her. It was Jamal, the captain of the football team. "Hey," Jamal said, looking tired. "I just needed a break."` },
-      { title: "Chapter 3: The Break", content: `For a few minutes, they ate in comfortable silence. "You read a lot," Jamal observed. "What's that one about?" "It's a romance," Efua admitted. Jamal smiled. "That sounds nice. Escaping expectations."` }
-    ]
-  },
-  {
-    id: "the-secret-society",
-    title: "The Secret Society",
-    author: "Anonymous",
-    category: "normal",
-    chapters: [
-      { title: "Chapter 1: The Symbol", content: `It started with a carved symbol on the back of the library door. A triangle with a single eye inside. Kofi only noticed it because he was taking a shortcut through the library.` },
-      { title: "Chapter 2: The Note", content: `But two days later, Kofi found a matching symbol carved onto his wooden desk in the biology lab. There was a small piece of paper tucked into the groove. Meet at the old borehole. Midnight.` },
-      { title: "Chapter 3: The Order", content: `At midnight, against his better judgment, Kofi snuck out of his dorm. To his shock, he wasn't alone. "I see you got the invitation," a voice said. It was the Head Girl, Cynthia.` }
-    ]
-  },
-  {
-    id: "the-rivalry",
-    title: "The Rivalry",
-    author: "Anonymous",
-    category: "romance",
-    chapters: [
-      { title: "Chapter 1: The Rivals", content: `If there was one thing Nana hated more than waking up early, it was Efua. Efua was the class genius. Nana, who was loud, messy, and preferred sports to studying, couldn't stand her.` },
-      { title: "Chapter 2: The Debate", content: `Their rivalry came to a head when the Headmaster announced a school-wide debate competition. Efua was chosen to argue against phones. Nana was chosen to argue for it.` },
-      { title: "Chapter 3: The Tie", content: `Efua went first. She was flawless. Then it was Nana's turn. She talked about the girl in her village who needed to call her mother. The crowd erupted in applause.` }
-    ]
-  },
-  {
-    id: "the-substitute-teacher",
-    title: "The Substitute Teacher",
-    author: "Anonymous",
-    category: "normal",
-    chapters: [
-      { title: "Chapter 1: The Stranger", content: `When Mr. Boateng didn't show up for Physics class, the students were thrilled. But the man who walked in wasn't a normal substitute. He was young, wearing a suit that looked too expensive.` },
-      { title: "Chapter 2: The Picture", content: `"Sir, who is the man in the picture on your desk?" Adwoa asked. Mr. Mensah stopped writing. "What picture?" Adwoa pointed to the teacher's desk. There was no picture.` },
-      { title: "Chapter 3: The Lock", content: `"I saw it," Adwoa insisted. "It was a picture of Mr. Boateng. But it had a red X drawn over his face." Mr. Mensah looked at Adwoa. "Perhaps you need to visit the school nurse. You seem to be seeing things."` }
-    ]
-  },
-  {
-    id: "the-graduation-secret",
-    title: "The Graduation Secret",
-    author: "Anonymous",
-    category: "romance",
-    chapters: [
-      { title: "Chapter 1: The Last Day", content: `It was the last day of SHS. Maya sat on the steps of the auditorium, staring at her graduation gown. She had spent two of those years secretly in love with her best friend, Jaden.` },
-      { title: "Chapter 2: The Note", content: `"You look like you're going to cry," Jaden said, sitting down next to her. He reached into his pocket and pulled out a small, folded piece of paper. "I think I should give it to you now."` },
-      { title: "Chapter 3: The List", content: `Maya unfolded it. It was a list. Reasons why I never told you: 1. I was scared you didn't feel the same way. 2. I didn't want to ruin our friendship. 3. I thought we had more time.` }
-    ]
-  },
-  {
-    id: "the-football-mystery",
-    title: "The Football Mystery",
-    author: "Anonymous",
-    category: "normal",
-    chapters: [
-      { title: "Chapter 1: The Missing Captain", content: `The biggest match of the year was in three hours. But the captain of the football team, David, was missing. He hadn't shown up for morning practice.` },
-      { title: "Chapter 2: The Roof", content: `Chris, the team's water boy, slipped out of the locker room and went to the roof of the science block. David was sitting on the edge, staring out at the empty field.` },
-      { title: "Chapter 3: The Threat", content: `"I got a letter last night," David said. "Someone knows about my fake transcript. They said if I step on the field today, they will tell the Headmaster and I'll lose my scholarship."` }
-    ]
-  },
-  {
-    id: "the-sneaker-park",
-    title: "The Sneaker Park",
-    author: "Anonymous",
-    category: "romance",
-    chapters: [
-      { title: "Chapter 1: The Market", content: `Esi worked at her father's sneaker stand in the bustling market. She hated it. But she didn't hate Ato. Ato came by every Tuesday and Thursday after school to look at the newest shoes.` },
-      { title: "Chapter 2: The Rain", content: `One Thursday, it started pouring rain. The market flooded. Out of nowhere, Ato appeared, soaked to the bone. "Grab the top boxes!" he shouted over the roar of the rain.` },
-      { title: "Chapter 3: The Tea", content: `By the time they finished, they were both shivering and covered in mud. "Thank you," Esi panted. "You didn't have to do that." Ato smiled. "Of course I did."` }
-    ]
-  }
+The diary belonged to a girl named Araba, who lived there fifty years ago. As Efua read the pages, she realized Araba's story was terrifyingly similar to her own. Same heartbreak. Same lost love.
+
+But the last page of the diary sent a chill down Efua's spine. It was a warning, written in frantic script: "He is coming back. Don't let him in."`
+  ),
+  createLongStory(
+    "the-last-survivor",
+    "The Last Survivor",
+    "Anonymous",
+    "normal",
+    45,
+    `The year was 2099. The world above was a toxic wasteland. 
+
+Kofi was one of the few remaining humans, living in the underground bunker known as Sector 4. For ten years, he had followed the rules: don't go to the surface, don't ask questions, and trust the Elders.
+
+But when a supply drone crashes into the bunker's ventilation shaft, Kofi finds a message hidden inside. It's a map, leading to a place called "Sanctuary." 
+
+The problem? Sanctuary is rumored to be a myth. And the Elders will kill anyone who tries to leave.`
+  ),
+  createLongStory(
+    "blood-on-the-campus",
+    "Blood on the Campus",
+    "Anonymous",
+    "normal",
+    30,
+    `It was supposed to be a normal Friday night at St. Mary's University. But when the star athlete, David, was found unconscious in the locker room, the entire campus went into lockdown.
+
+Amara, a journalism student, knew something was wrong. The police said it was an accident, but she saw the bruises on David's arms. 
+
+Determined to find the truth, Amara started digging. But the deeper she went, the more she realized that everyone—from the coach to the Dean—was hiding something. And someone was willing to kill to keep the secret buried.`
+  ),
+  createLongStory(
+    "the-billionaires-betrayal",
+    "The Billionaire's Betrayal",
+    "Anonymous",
+    "romance",
+    50,
+    `Nana had signed the contract in a moment of desperation. Ten years of marriage to a man she barely knew, in exchange for saving her father's company.
+
+Kwame was cold, ruthless, and obsessively private. He made it clear from day one: this was a business arrangement, not a romance. No feelings allowed.
+
+But when a mysterious woman from Kwame's past shows up at their doorstep, Nana realizes her husband is hiding a dark secret. And the more she uncovers, the more she realizes that her fake husband might actually be falling for her... if he can survive the demons of his past.`
+  )
 ];
 
 // Colors for DARK mode
@@ -629,7 +593,6 @@ function openStory(id) {
     return;
   }
 
-  // HIDE THE HEADER HERE
   mainHeader.classList.add("hidden");
 
   activeStory = story;
@@ -651,7 +614,6 @@ function openStory(id) {
 function showList() {
   stopSpeech();
   
-  // SHOW THE HEADER HERE
   mainHeader.classList.remove("hidden");
 
   activeStory = null;
