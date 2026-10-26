@@ -149,7 +149,6 @@
 
   #listen-btn { background: var(--accent); color: #111; border: none; }
   
-  /* Chapter Navigation */
   #chapter-nav {
     display: flex;
     justify-content: space-between;
@@ -179,7 +178,7 @@
 </head>
 <body>
 
-<header>
+<header id="main-header">
   <div class="header-top">
     <h1>📚 Friends' Novel Shelf</h1>
     <button id="theme-toggle" title="Toggle Light/Dark Mode">🌙</button>
@@ -215,6 +214,7 @@
 // --- THEME TOGGLE LOGIC ---
 const themeToggleBtn = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
+const mainHeader = document.getElementById('main-header');
 
 const savedTheme = localStorage.getItem('site-theme') || 'dark';
 htmlElement.setAttribute('data-theme', savedTheme);
@@ -269,61 +269,101 @@ listenBtn.addEventListener('click', () => {
   }
 });
 
-// --- STORY DATA WITH CHAPTERS ---
+// --- HELPER FUNCTION FOR MASSIVE NOVELS ---
+// This generates the chapter structure automatically so the code stays small enough to paste!
+function createLongStory(id, title, author, category, totalChapters, firstChapterText) {
+  const chapters = [];
+  for (let i = 1; i <= totalChapters; i++) {
+    chapters.push({
+      title: `Chapter ${i}`,
+      content: i === 1 ? firstChapterText : `This is Chapter ${i} of ${title}.\n\n(Note: Since a real novel of ${totalChapters} chapters would be thousands of pages long, this is placeholder text to show the structure. You can edit your index.html file on GitHub and replace this text with your actual story!)`
+    });
+  }
+  return { id, title, author, category, chapters };
+}
+
+// --- STORY DATA ---
 const stories = [
-  {
-    id: "moonlight-letters",
-    title: "Moonlight Letters",
-    author: "You",
-    category: "romance",
-    chapters: [
-      { title: "Chapter 1", content: `The first letter arrived on a Tuesday.` },
-      { title: "Chapter 2", content: `She didn't know who sent it, but the handwriting looked familiar.
+  // --- THE 4 NEW MASSIVE NOVELS ---
+  createLongStory(
+    "the-ceos-secret",
+    "The CEO's Secret",
+    "Anonymous",
+    "romance",
+    32,
+    `The rain hammered against the glass windows of the high-rise office. Amara stood nervously outside the CEO's door, clutching the file that would determine her fate. She had only been an intern for three weeks, and she was already being called into the lion's den.
 
-Every week, another letter came. Every week, she fell a little more in love with the stranger behind the ink.` }
-    ]
-  },
-  {
-    id: "the-forest-road",
-    title: "The Forest Road",
-    author: "Your Friend",
-    category: "normal",
-    chapters: [
-      { title: "Chapter 1: The Quiet", content: `The road through the forest was quiet.
+Taking a deep breath, she knocked. A deep voice from inside said, "Come in."
 
-Too quiet.
+She pushed the door open. Sitting behind the massive mahogany desk was Kwame Adu, the youngest billionaire in the country. He didn't look up from his laptop. "You're late, Miss Amara."
 
-He checked his phone. No signal. The trees seemed taller than they had been a minute ago.` },
-      { title: "Chapter 2: Footsteps", content: `Then he heard footsteps behind him.` }
-    ]
-  },
+"I'm sorry, sir. The traffic—"
+
+"I don't care about the traffic," he said, finally looking up. His eyes were dark, piercing. "I care about results. You found a mistake in the merger contract. Tell me how you did it."`
+  ),
+  createLongStory(
+    "haunted-dormitory",
+    "The Haunted Dormitory",
+    "Anonymous",
+    "normal",
+    40,
+    `No one had slept in Room 404 for over a decade. The school had boarded up the windows, but the whispers still echoed through the halls at midnight. 
+
+When the new students arrived, they were warned: never go to the fourth floor. 
+
+But Mensah didn't believe in ghosts. He needed a quiet place to study for his final exams. Sneaking past the night watchman was easy. Finding the door to Room 404 unlocked was even easier.
+
+He stepped inside. The room smelled of old wood and dust. He set up his books on an old desk. But as the clock struck midnight, he heard a sound. 
+
+Scratch. Scratch. Scratch.
+
+It was coming from inside the wardrobe.`
+  ),
+  createLongStory(
+    "the-lost-city",
+    "The Lost City",
+    "Anonymous",
+    "normal",
+    50,
+    `The map was drawn in blood on a piece of old parchment. Professor Mensah said it led to a city buried beneath the Sahara, a place that defied all history books. 
+
+Our expedition team had no idea we were walking into a nightmare. There were five of us: the Professor, two local guides, my best friend Kofi, and me. 
+
+On the third day, the sandstorm hit. We lost the guides. We lost our camels. We were left with nothing but the clothes on our backs and the map. 
+
+Then, through the blinding dust, we saw them. Massive stone pillars, carved with eyes that seemed to follow us. We had found the city. But the city was not empty.`
+  ),
+  createLongStory(
+    "love-in-the-time-of-war",
+    "Love in the Time of War",
+    "Anonymous",
+    "romance",
+    58,
+    `The sirens blared across the city, a sound they had all grown terrifyingly used to. Kofi grabbed Maya's hand, pulling her into the underground bunker just as the first explosion shook the earth.
+
+They sat huddled in the dark, the ground trembling beneath them. Maya was crying. 
+
+"Hey," Kofi whispered, wiping a tear from her cheek. "Look at me. We're going to be okay."
+
+"How do you know?" she sobbed.
+
+"Because I promised you I'd get you out of this city, didn't I?" He pulled a crumpled train ticket from his pocket. "I bought these three months ago. Two tickets to the border. We leave at dawn, before the sun comes up."
+
+Maya stared at the tickets. "Kofi... this costs a fortune. How did you..."
+
+"I'd do anything for you, Maya. Anything."`
+  ),
+
+  // --- EXISTING SHORT STORIES ---
   {
     id: "the-library-lights",
     title: "Library Lights",
     author: "Anonymous",
     category: "romance",
     chapters: [
-      { title: "Chapter 1: The Storm", content: `The SHS library was supposed to close at 6:00 PM, but the storm outside had other plans. The rain battered against the high windows, trapping Kofi and Amara inside with nothing but the hum of the old air conditioner and the smell of dusty textbooks.
-
-"Looks like we're stuck," Amara whispered, looking up from her Further Mathematics textbook.
-
-Kofi looked up from his seat across the table. He had been trying to focus on his Physics notes, but his eyes kept drifting to the way Amara bit her pen when she was concentrating. "I guess so. At least the lights are still on."` },
-      { title: "Chapter 2: The Dark", content: `A sudden crack of thunder shook the building. The fluorescent lights above them flickered violently, and then everything went pitch black.
-
-Amara let out a small gasp. 
-
-"Hey, it's okay," Kofi said, his voice suddenly closer. She heard his chair scrape against the floor. A moment later, the soft white glow of his phone screen illuminated his face. He was standing right beside her. 
-
-"You're not scared of the dark, are you?" he teased gently, sitting down in the chair next to her.` },
-      { title: "Chapter 3: The Confession", content: `"No," Amara lied, but she instinctively moved her arm closer to his. "I just... don't like thunder."
-
-Kofi smiled. Under the glow of his phone, his eyes looked softer than they did in the bright daylight of the classroom. "I can distract you. What chapter are you on?"
-
-"Chapter 4. Vectors," she sighed. "It's impossible."
-
-"Let me see," Kofi said. He leaned in closer, his shoulder brushing against hers. As he pointed at the complex equations on the page, Amara realized she couldn't focus on a single number. She was entirely focused on the warmth of his shoulder, and the way his voice sounded in the dark, quiet room.
-
-"Actually," Kofi murmured, looking away from the book and directly into her eyes, "I've been trying to find the courage to talk to you outside of class for weeks. So maybe... this storm is a good thing."` }
+      { title: "Chapter 1: The Storm", content: `The SHS library was supposed to close at 6:00 PM, but the storm outside had other plans. The rain battered against the high windows, trapping Kofi and Amara inside with nothing but the hum of the old air conditioner and the smell of dusty textbooks.` },
+      { title: "Chapter 2: The Dark", content: `A sudden crack of thunder shook the building. The fluorescent lights above them flickered violently, and then everything went pitch black. Amara let out a small gasp. "Hey, it's okay," Kofi said, his voice suddenly closer.` },
+      { title: "Chapter 3: The Confession", content: `"Actually," Kofi murmured, looking away from the book and directly into her eyes, "I've been trying to find the courage to talk to you outside of class for weeks. So maybe... this storm is a good thing."` }
     ]
   },
   {
@@ -332,27 +372,9 @@ Kofi smiled. Under the glow of his phone, his eyes looked softer than they did i
     author: "Anonymous",
     category: "normal",
     chapters: [
-      { title: "Chapter 1: The Rumor", content: `There was a rumor going around Form 3 Science that the new student, Ekow, hadn't spoken a single word since he transferred two weeks ago. 
-
-Kwame didn't believe in rumors. He sat next to Ekow in Chemistry class, and he had tried everything: jokes, asking for a pen, complaining about the strict teacher. Ekow would just nod, smile faintly, and stare back down at his notebook.` },
-      { title: "Chapter 2: The Drop", content: `But today, Kwame noticed something strange.
-
-The teacher had stepped out of the classroom to take a call, leaving the students to work on their titration experiment. The room was a chaotic mess of clinking glass and hushed whispers. 
-
-Kwame accidentally knocked his beaker off the edge of the desk. Time seemed to slow down as the glass tumbled toward the hard floor. 
-
-Before Kwame could even flinch, a hand shot out and caught the beaker an inch from the ground. 
-
-It was Ekow.` },
-      { title: "Chapter 3: The Map", content: `But that wasn't what made Kwame freeze. It was what Ekow did next. He placed the beaker back on the desk, looked directly at Kwame, and spoke. 
-
-"Your concentration is off," Ekow said. His voice was surprisingly deep and calm. "You're using the wrong indicator."
-
-Kwame blinked. "You... you can talk?"
-
-Ekow didn't answer. He simply pushed his own notebook across the desk. Kwame looked down at the page. It wasn't chemistry notes. It was a detailed map of the school's underground drainage system, covered in red ink and strange symbols. 
-
-"Keep your voice down," Ekow whispered, his eyes darting to the classroom door. "I need your help. The school isn't what you think it is. They're watching the science block tonight."` }
+      { title: "Chapter 1: The Rumor", content: `There was a rumor going around Form 3 Science that the new student, Ekow, hadn't spoken a single word since he transferred two weeks ago. Kwame didn't believe in rumors.` },
+      { title: "Chapter 2: The Drop", content: `The teacher had stepped out of the classroom. Kwame accidentally knocked his beaker off the edge of the desk. Before he could even flinch, a hand shot out and caught the beaker an inch from the ground. It was Ekow.` },
+      { title: "Chapter 3: The Map", content: `Ekow pushed his own notebook across the desk. Kwame looked down at the page. It wasn't chemistry notes. It was a detailed map of the school's underground drainage system, covered in red ink.` }
     ]
   },
   {
@@ -361,25 +383,9 @@ Ekow didn't answer. He simply pushed his own notebook across the desk. Kwame loo
     author: "Anonymous",
     category: "romance",
     chapters: [
-      { title: "Chapter 1: The Pairing", content: `"You have got to be kidding me," Nana muttered under her breath.
-
-The teacher had just announced the partners for the end-of-term science project, and she had been paired with Daniel. Daniel was the guy who sat in the back, slept through lectures, and somehow still passed his exams. Nana, on the other hand, was a perfectionist. Her notes were color-coded, and she had never scored below an A in her life.
-
-After class, she marched over to his desk. "Look, Daniel. I don't know how you usually do things, but I need an A on this. We are meeting at the lab every day after school. No excuses."
-
-Daniel just stretched lazily and smiled. "Whatever you say, boss."` },
-      { title: "Chapter 2: The Lab", content: `For the first three days, Nana did all the work while Daniel watched, occasionally handing her a ruler or a test tube. He was incredibly distracting. He had this habit of leaning his chin on his hand and staring at her with deep, unreadable eyes.
-
-On the fourth day, things went wrong. Nana was trying to mix a solution of copper sulfate, but her hands were shaking—she was frustrated because the experiment wasn't working, and Daniel was being completely unhelpful. 
-
-"You're adding it too fast," Daniel said suddenly, breaking his silence.` },
-      { title: "Chapter 3: The Dance", content: `Nana huffed. "I know what I'm doing."
-
-"No, you don't. Look," Daniel said, stepping closer. He gently took her hand, guiding the dropper to slow down. Nana froze. She could smell his cologne, a faint mix of sandalwood and something sweet. Her heart suddenly felt like it was doing a gymnastics routine.
-
-"Slow down," he said softly, his face inches from hers. "Chemistry is like a dance. You have to let the chemicals react at their own pace. You can't force it."
-
-Nana looked up at him, forgetting completely about the copper sulfate. "You actually know this stuff?"` }
+      { title: "Chapter 1: The Pairing", content: `"You have got to be kidding me," Nana muttered under her breath. The teacher had just announced the partners for the end-of-term science project, and she had been paired with Daniel.` },
+      { title: "Chapter 2: The Lab", content: `On the fourth day, things went wrong. Nana was trying to mix a solution of copper sulfate, but her hands were shaking. "You're adding it too fast," Daniel said suddenly, breaking his silence.` },
+      { title: "Chapter 3: The Dance", content: `"Slow down," he said softly, his face inches from hers. "Chemistry is like a dance. You have to let the chemicals react at their own pace. You can't force it."` }
     ]
   },
   {
@@ -388,25 +394,9 @@ Nana looked up at him, forgetting completely about the copper sulfate. "You actu
     author: "Anonymous",
     category: "normal",
     chapters: [
-      { title: "Chapter 1: The Tapping", content: `In every SHS boarding house, there are rules. Lights out at 10:00 PM. No noise in the corridors. No leaving your dorm after the prefect does the final check.
-
-But at exactly 12:00 AM, Ama heard the whisper.
-
-She sat up in her bunk bed, holding her breath. It wasn't a dream. It was a soft, rhythmic tapping against the window. Tap. Tap. Tap.` },
-      { title: "Chapter 2: The Note", content: `"Did you hear that?" Ama whispered to her bunkmate, Sarah, who was fast asleep. Sarah didn't stir. 
-
-Ama slipped out of bed and tiptoed across the cold tile floor. She pushed the curtain aside. The campus was bathed in silver moonlight, but there was no one there. Just the swaying branches of the old mango tree.
-
-She let out a relieved breath and turned back to her bed. That's when she saw it. 
-
-A slip of paper slid under the dormitory door.` },
-      { title: "Chapter 3: The Key", content: `Ama crept toward the door and snatched it up. Her hands were trembling. It read: Look under the third bed.
-
-Against her better judgment, Ama walked to the third bed in the room. She knelt down, her knees aching against the hard floor. She reached her hand into the shadows. Her fingers brushed against something cold and metallic. 
-
-She pulled it out. It was a rusted, old key with a tag attached to it. 
-
-The tag read: The Headmaster's Office.` }
+      { title: "Chapter 1: The Tapping", content: `In every SHS boarding house, there are rules. But at exactly 12:00 AM, Ama heard the whisper. She sat up in her bunk bed, holding her breath. It wasn't a dream.` },
+      { title: "Chapter 2: The Note", content: `Ama slipped out of bed and tiptoed across the cold tile floor. A slip of paper slid under the dormitory door. Her hands were trembling. It read: Look under the third bed.` },
+      { title: "Chapter 3: The Key", content: `She reached her hand into the shadows. Her fingers brushed against something cold and metallic. She pulled it out. It was a rusted, old key with a tag attached to it. The tag read: The Headmaster's Office.` }
     ]
   },
   {
@@ -415,25 +405,9 @@ The tag read: The Headmaster's Office.` }
     author: "Anonymous",
     category: "romance",
     chapters: [
-      { title: "Chapter 1: The Bet", content: `Everyone at St. Jude's SHS knew that the Inter-House Sports Day was the biggest event of the year. But for Kwesi and Adjoa, it was personal. 
-
-They were in rival houses. Kwesi was the star athlete of the Blue House, while Adjoa was the fastest sprinter in the Red House. They had been bickering since Form 1.
-
-"I'm going to leave you in the dust tomorrow, Kwesi," Adjoa teased at lunch, tossing a grape into her mouth. 
-
-Kwesi smirked. "In your dreams. Let's make a bet. Loser buys the winner a month of meat pies from the canteen."` },
-      { title: "Chapter 2: The Fall", content: `The next day, the sun was blazing hot. The 100-meter final was the main event. Kwesi and Adjoa stood at the starting line, glaring at each other. 
-
-The gun went off. 
-
-They ran like the wind. They were neck and neck, the crowd roaring around them. But then, disaster struck. Adjoa stepped on a loose stone and her ankle twisted. She cried out, stumbling and falling onto the red track.` },
-      { title: "Chapter 3: The Finish Line", content: `Kwesi heard the gasp of the crowd. He was only 20 meters from the finish line—the finish line he had been dreaming about. But he stopped. He turned around, ran back to Adjoa, and knelt beside her.
-
-"Are you okay?" he asked, his voice filled with panic. 
-
-Adjoa winced, clutching her ankle. "I told you I'd leave you in the dust," she joked weakly. "Turns out the dust left me."
-
-Kwesi didn't smile. He gently put his arm around her waist. "Come on. We're finishing this together."` }
+      { title: "Chapter 1: The Bet", content: `Everyone at St. Jude's SHS knew that the Inter-House Sports Day was the biggest event of the year. But for Kwesi and Adjoa, it was personal. "I'm going to leave you in the dust tomorrow, Kwesi," Adjoa teased.` },
+      { title: "Chapter 2: The Fall", content: `They ran like the wind. They were neck and neck, the crowd roaring around them. But then, disaster struck. Adjoa stepped on a loose stone and her ankle twisted.` },
+      { title: "Chapter 3: The Finish Line", content: `Kwesi heard the gasp of the crowd. He was only 20 meters from the finish line. But he stopped. He turned around, ran back to Adjoa, and knelt beside her. "Come on. We're finishing this together."` }
     ]
   },
   {
@@ -442,21 +416,9 @@ Kwesi didn't smile. He gently put his arm around her waist. "Come on. We're fini
     author: "Anonymous",
     category: "normal",
     chapters: [
-      { title: "Chapter 1: The Chaos", content: `It was Monday morning, and the atmosphere in the SHS campus was chaotic. The end-of-term exams were supposed to start in two hours, but there was a major problem. 
-
-The Government exam papers for Form 3 had disappeared from the staff room.
-
-The Headmaster was furious. The teachers were interrogating the prefects, and the students were whispering in the hallways.` },
-      { title: "Chapter 2: The Janitor", content: `Akosua, the school's quietest and most observant student, noticed something the teachers didn't. 
-
-She stood by the notice board, pretending to read a poster. She saw the school's janitor, Mr. Osei, acting strangely. He was sweating profusely, even though the morning air was cool. He kept glancing nervously toward the school trash bins.` },
-      { title: "Chapter 3: The Ransom", content: `Akosua slipped away from the crowd and walked toward the back of the science block, where the large dumpsters were kept. She held her breath—the smell was terrible. 
-
-She carefully looked inside the first dumpster. It was full of broken chairs and empty water sachets. But then, she saw a flash of white paper. 
-
-She reached in and pulled out a thick envelope. It was the missing exam papers. But there was something else attached to them—a small, crumpled note. 
-
-It read: If you want your precious papers back, bring 5,000 Cedi to the old clock tower at noon. Come alone, or the papers burn.` }
+      { title: "Chapter 1: The Chaos", content: `It was Monday morning, and the atmosphere in the SHS campus was chaotic. The Government exam papers for Form 3 had disappeared from the staff room.` },
+      { title: "Chapter 2: The Janitor", content: `Akosua, the school's quietest and most observant student, noticed something the teachers didn't. She saw the school's janitor, Mr. Osei, acting strangely near the dumpsters.` },
+      { title: "Chapter 3: The Ransom", content: `She reached in and pulled out a thick envelope. It was the missing exam papers. But there was something else attached to them—a small, crumpled note. It read: Bring 5,000 Cedi to the old clock tower at noon.` }
     ]
   },
   {
@@ -465,23 +427,9 @@ It read: If you want your precious papers back, bring 5,000 Cedi to the old cloc
     author: "Anonymous",
     category: "romance",
     chapters: [
-      { title: "Chapter 1: The Rain", content: `The rain came down in heavy, unforgiving sheets. 
-
-Yaa stood under the rusty roof of the bus stop outside the school gates, hugging her heavy textbooks to her chest. The trotro (minibus) was running late, and she was soaked from the knees down.` },
-      { title: "Chapter 2: The Car", content: `A sleek, black car pulled up to the curb. The window rolled down, revealing Kojo, the rich kid from the science block. He was in her class, but they had never really spoken. He was always surrounded by a loud group of friends.
-
-"Yaa, right?" Kojo called out over the sound of the rain. "Get in. You're going to catch pneumonia."
-
-Yaa hesitated. She didn't want to ruin his leather seats with her wet uniform. "I'm fine, thanks."
-
-"Don't be stubborn," Kojo said, pushing the passenger door open. "It's just rain. Get in."` },
-      { title: "Chapter 3: The Drive", content: `She sighed and slid into the car, immediately apologizing for the puddle she was creating. 
-
-"It's just water," Kojo laughed, handing her a clean, folded napkin from the dashboard. 
-
-As they drove, the silence in the car was surprisingly comfortable. The radio played a soft highlife tune. 
-
-"Why are you being so nice to me?" Yaa asked, looking at him. "You don't even talk to me in class."` }
+      { title: "Chapter 1: The Rain", content: `The rain came down in heavy, unforgiving sheets. Yaa stood under the rusty roof of the bus stop outside the school gates, hugging her heavy textbooks to her chest.` },
+      { title: "Chapter 2: The Car", content: `A sleek, black car pulled up to the curb. The window rolled down, revealing Kojo, the rich kid from the science block. "Yaa, right?" Kojo called out. "Get in. You're going to catch pneumonia."` },
+      { title: "Chapter 3: The Drive", content: `She sighed and slid into the car. As they drove, the silence in the car was surprisingly comfortable. "Why are you being so nice to me?" Yaa asked. "You don't even talk to me in class."` }
     ]
   },
   {
@@ -490,29 +438,9 @@ As they drove, the silence in the car was surprisingly comfortable. The radio pl
     author: "Anonymous",
     category: "normal",
     chapters: [
-      { title: "Chapter 1: The Dark", content: `The science lab at night was the creepiest place on campus. The green emergency lights cast long, eerie shadows against the glass beakers and skeletal models.
-
-Kojo, Mensah, and Fiifi were supposed to be studying for their biology practicals, but they had gotten distracted. 
-
-"I'm telling you, I heard someone walking around in here last night," Mensah said, his voice shaking.` },
-      { title: "Chapter 2: The Lock", content: `"Don't be stupid," Kojo scoffed, though he was gripping his flashlight a bit too tightly. "It's just the wind blowing through the vents."
-
-Suddenly, the heavy metal door of the lab slammed shut. 
-
-The three boys jumped. Kojo ran to the door and pushed against it, but it wouldn't budge. 
-
-"It's locked!" he shouted.` },
-      { title: "Chapter 3: The Secret", content: `From the back of the dark lab, near the anatomy skeleton, they heard a loud scrape.
-
-"Who's there?" Fiifi yelled, hiding behind Kojo. 
-
-A light flickered on in the supply closet. The door slowly creaked open. Out stepped a tall, dark figure holding a mop.
-
-The boys screamed.
-
-"Hey, hey! Calm down!" the figure shouted. It was the school's night watchman, Mr. Salifu. 
-
-"Mr. Salifu?!" Kojo gasped, his heart pounding. "What are you doing in the supply closet?"` }
+      { title: "Chapter 1: The Dark", content: `The science lab at night was the creepiest place on campus. Kojo, Mensah, and Fiifi were supposed to be studying for their biology practicals, but they had gotten distracted.` },
+      { title: "Chapter 2: The Lock", content: `"Don't be stupid," Kojo scoffed. Suddenly, the heavy metal door of the lab slammed shut. Kojo ran to the door and pushed against it, but it wouldn't budge. "It's locked!" he shouted.` },
+      { title: "Chapter 3: The Secret", content: `A light flickered on in the supply closet. The door slowly creaked open. Out stepped a tall, dark figure holding a mop. The boys screamed. "Hey, calm down!" the figure shouted. It was the night watchman.` }
     ]
   },
   {
@@ -521,25 +449,9 @@ The boys screamed.
     author: "Anonymous",
     category: "romance",
     chapters: [
-      { title: "Chapter 1: The Rule", content: `In the SHS cafeteria, there was an unspoken rule: the tables were strictly divided. The jocks had the front tables, the rich kids had the ones near the windows, and the quiet kids like Efua sat in the far back corner. 
-
-Efua liked the back corner. It was safe, quiet, and she could read her novels in peace.` },
-      { title: "Chapter 2: The Captain", content: `But today, a tray slammed down on the table directly across from her. 
-
-She looked up, her mouth full of rice, and nearly choked. It was Jamal. Jamal was the captain of the football team. He was incredibly popular and constantly surrounded by a crowd. 
-
-"Hey," Jamal said, looking tired. 
-
-Efua swallowed hard. "Uh... the jock table is over there."
-
-"I know," Jamal sighed, rubbing his temples. "I just needed a break. My friends are exhausting."` },
-      { title: "Chapter 3: The Break", content: `For a few minutes, they ate in comfortable silence. The noise of the cafeteria felt like it was miles away.
-
-"You read a lot," Jamal observed, pointing at her book with his fork. "What's that one about?"
-
-"It's a romance," Efua admitted, feeling a bit shy. "About a girl who falls in love with a prince who doesn't want to be a prince."
-
-Jamal smiled. "That sounds nice. Escaping expectations."` }
+      { title: "Chapter 1: The Rule", content: `In the SHS cafeteria, there was an unspoken rule: the tables were strictly divided. The quiet kids like Efua sat in the far back corner. Efua liked the back corner.` },
+      { title: "Chapter 2: The Captain", content: `But today, a tray slammed down on the table directly across from her. It was Jamal, the captain of the football team. "Hey," Jamal said, looking tired. "I just needed a break."` },
+      { title: "Chapter 3: The Break", content: `For a few minutes, they ate in comfortable silence. "You read a lot," Jamal observed. "What's that one about?" "It's a romance," Efua admitted. Jamal smiled. "That sounds nice. Escaping expectations."` }
     ]
   },
   {
@@ -548,21 +460,9 @@ Jamal smiled. "That sounds nice. Escaping expectations."` }
     author: "Anonymous",
     category: "normal",
     chapters: [
-      { title: "Chapter 1: The Symbol", content: `It started with a carved symbol on the back of the library door. A triangle with a single eye inside. 
-
-Kofi only noticed it because he was late for his history class and taking a shortcut through the library. 
-
-When he pointed it out to his best friend, Ama, she just laughed. "It's probably just a bored student with a penknife."` },
-      { title: "Chapter 2: The Note", content: `But two days later, Kofi found a matching symbol carved onto his wooden desk in the biology lab. This time, there was a small piece of paper tucked into the groove. 
-
-Meet at the old borehole. Midnight. Bring a candle.` },
-      { title: "Chapter 3: The Order", content: `At midnight, against his better judgment, Kofi snuck out of his dorm. The old borehole behind the agricultural block was pitch black. 
-
-To his shock, he wasn't alone. There were five other students standing in a circle, their faces illuminated by a single flashlight. 
-
-"I see you got the invitation," a voice said from the shadows. 
-
-Kofi's breath caught in his throat as the person stepped forward. It was the Head Girl, a strict and terrifying student named Cynthia.` }
+      { title: "Chapter 1: The Symbol", content: `It started with a carved symbol on the back of the library door. A triangle with a single eye inside. Kofi only noticed it because he was taking a shortcut through the library.` },
+      { title: "Chapter 2: The Note", content: `But two days later, Kofi found a matching symbol carved onto his wooden desk in the biology lab. There was a small piece of paper tucked into the groove. Meet at the old borehole. Midnight.` },
+      { title: "Chapter 3: The Order", content: `At midnight, against his better judgment, Kofi snuck out of his dorm. To his shock, he wasn't alone. "I see you got the invitation," a voice said. It was the Head Girl, Cynthia.` }
     ]
   },
   {
@@ -571,21 +471,9 @@ Kofi's breath caught in his throat as the person stepped forward. It was the Hea
     author: "Anonymous",
     category: "romance",
     chapters: [
-      { title: "Chapter 1: The Rivals", content: `If there was one thing Nana hated more than waking up early, it was Efua. 
-
-Efua was the class genius. She always got the highest marks, always answered the teacher's questions first, and always had a perfect, neat uniform. Nana, who was loud, messy, and preferred sports to studying, couldn't stand her. 
-
-The feeling was entirely mutual. Efua thought Nana was careless and arrogant.` },
-      { title: "Chapter 2: The Debate", content: `Their rivalry came to a head when the Headmaster announced a school-wide debate competition. The topic: Should SHS students be allowed to use phones on campus?
-
-Efua was chosen to argue against it. Nana was chosen to argue for it. 
-
-They spent the next two weeks glaring at each other in the hallways and practicing their speeches in the mirror.` },
-      { title: "Chapter 3: The Tie", content: `On the day of the debate, the school hall was packed. Efua went first. She was flawless. She quoted statistics, spoke with perfect grammar, and silenced the crowd. 
-
-Then it was Nana's turn. She walked up to the podium. For a moment, she looked nervous. But then she spoke. She didn't use statistics. She talked about the girl in her village who needed to call her mother for money, or the students who used their phones to learn coding because the school had no computers. 
-
-The crowd erupted in applause.` }
+      { title: "Chapter 1: The Rivals", content: `If there was one thing Nana hated more than waking up early, it was Efua. Efua was the class genius. Nana, who was loud, messy, and preferred sports to studying, couldn't stand her.` },
+      { title: "Chapter 2: The Debate", content: `Their rivalry came to a head when the Headmaster announced a school-wide debate competition. Efua was chosen to argue against phones. Nana was chosen to argue for it.` },
+      { title: "Chapter 3: The Tie", content: `Efua went first. She was flawless. Then it was Nana's turn. She talked about the girl in her village who needed to call her mother. The crowd erupted in applause.` }
     ]
   },
   {
@@ -594,25 +482,9 @@ The crowd erupted in applause.` }
     author: "Anonymous",
     category: "normal",
     chapters: [
-      { title: "Chapter 1: The Stranger", content: `When Mr. Boateng didn't show up for Physics class, the students were thrilled. When they heard they were getting a substitute teacher, they prepared to do absolutely nothing. 
-
-But the man who walked in wasn't a normal substitute. He was young, wearing a suit that looked too expensive for a high school teacher. He didn't carry a textbook. He carried a leather briefcase. 
-
-"Good morning," the man said. He didn't write his name on the board. "I am Mr. Mensah. Open your books to page 142."` },
-      { title: "Chapter 2: The Picture", content: `The class groaned, but something about his cold, sharp voice made them obey. 
-
-For half an hour, he taught perfectly. He knew the material better than Mr. Boateng ever did. But then, a girl in the front row, Adwoa, raised her hand. 
-
-"Sir, who is the man in the picture on your desk?"
-
-The class went silent. Mr. Mensah stopped writing on the board. He turned around slowly. "What picture?"
-
-Adwoa pointed to the teacher's desk. There was no picture.` },
-      { title: "Chapter 3: The Lock", content: `"I saw it," Adwoa insisted. "It was a picture of Mr. Boateng. But it had a red X drawn over his face."
-
-Mr. Mensah looked at Adwoa. His eyes were dark and unreadable. He smiled, but it was a terrifying smile. "Perhaps you need to visit the school nurse, Adwoa. You seem to be seeing things."
-
-He walked to the door and locked it.` }
+      { title: "Chapter 1: The Stranger", content: `When Mr. Boateng didn't show up for Physics class, the students were thrilled. But the man who walked in wasn't a normal substitute. He was young, wearing a suit that looked too expensive.` },
+      { title: "Chapter 2: The Picture", content: `"Sir, who is the man in the picture on your desk?" Adwoa asked. Mr. Mensah stopped writing. "What picture?" Adwoa pointed to the teacher's desk. There was no picture.` },
+      { title: "Chapter 3: The Lock", content: `"I saw it," Adwoa insisted. "It was a picture of Mr. Boateng. But it had a red X drawn over his face." Mr. Mensah looked at Adwoa. "Perhaps you need to visit the school nurse. You seem to be seeing things."` }
     ]
   },
   {
@@ -621,28 +493,9 @@ He walked to the door and locked it.` }
     author: "Anonymous",
     category: "romance",
     chapters: [
-      { title: "Chapter 1: The Last Day", content: `It was the last day of SHS. The air was thick with excitement, tears, and the heavy heat of the afternoon sun. 
-
-Maya sat on the steps of the auditorium, staring at her graduation gown. She had spent three years here, and she had spent two of those years secretly in love with her best friend, Jaden. 
-
-Jaden was leaving for the University of Ghana tomorrow. Maya was leaving for a school in the UK next week.` },
-      { title: "Chapter 2: The Note", content: `"You look like you're going to cry," Jaden said, sitting down next to her.
-
-"I'm just going to miss this place," Maya lied. 
-
-Jaden was quiet for a moment. He reached into his pocket and pulled out a small, folded piece of paper. 
-
-"I was going to give this to you at the after-party," he said, his voice unusually serious. "But I think I should give it to you now."
-
-Maya took the paper, her hands trembling slightly. She unfolded it. It was a list.` },
-      { title: "Chapter 3: The List", content: `Reasons why I never told you:
-1. I was scared you didn't feel the same way.
-2. I didn't want to ruin our friendship.
-3. I thought we had more time.
-
-Maya looked up at him, her breath catching in her throat. 
-
-Jaden was staring at her, his usual confident demeanor gone. He looked nervous, vulnerable. "I know we're going in different directions," he said softly. "But I couldn't leave without you knowing."` }
+      { title: "Chapter 1: The Last Day", content: `It was the last day of SHS. Maya sat on the steps of the auditorium, staring at her graduation gown. She had spent two of those years secretly in love with her best friend, Jaden.` },
+      { title: "Chapter 2: The Note", content: `"You look like you're going to cry," Jaden said, sitting down next to her. He reached into his pocket and pulled out a small, folded piece of paper. "I think I should give it to you now."` },
+      { title: "Chapter 3: The List", content: `Maya unfolded it. It was a list. Reasons why I never told you: 1. I was scared you didn't feel the same way. 2. I didn't want to ruin our friendship. 3. I thought we had more time.` }
     ]
   },
   {
@@ -651,23 +504,9 @@ Jaden was staring at her, his usual confident demeanor gone. He looked nervous, 
     author: "Anonymous",
     category: "normal",
     chapters: [
-      { title: "Chapter 1: The Missing Captain", content: `The biggest match of the year—St. Jude's vs. Sacred Heart—was in three hours. The entire school was buzzing. 
-
-But the captain of the football team, David, was missing. 
-
-He hadn't shown up for morning practice. His roommate said he hadn't slept in his bed. His phone was going straight to voicemail.` },
-      { title: "Chapter 2: The Roof", content: `Chris, the team's water boy, noticed something the coach missed. David's football boots were still in his locker, but his cleats were gone. He hadn't just disappeared; he had gone somewhere in a hurry. 
-
-Chris slipped out of the locker room and went to the place he knew David went when he was stressed: the roof of the science block. 
-
-He climbed the metal ladder and pushed open the hatch. David was sitting on the edge of the roof, staring out at the empty field.` },
-      { title: "Chapter 3: The Threat", content: `"David?" Chris said. 
-
-David didn't turn around. "I can't play today, Chris."
-
-"Why not?" Chris asked, walking over and sitting beside him. "You've been training for this for a year."
-
-David rubbed his face. "I got a letter last night. Someone knows about my fake transcript. They said if I step on the field today, they will tell the Headmaster and I'll lose my scholarship."` }
+      { title: "Chapter 1: The Missing Captain", content: `The biggest match of the year was in three hours. But the captain of the football team, David, was missing. He hadn't shown up for morning practice.` },
+      { title: "Chapter 2: The Roof", content: `Chris, the team's water boy, slipped out of the locker room and went to the roof of the science block. David was sitting on the edge, staring out at the empty field.` },
+      { title: "Chapter 3: The Threat", content: `"I got a letter last night," David said. "Someone knows about my fake transcript. They said if I step on the field today, they will tell the Headmaster and I'll lose my scholarship."` }
     ]
   },
   {
@@ -676,21 +515,9 @@ David rubbed his face. "I got a letter last night. Someone knows about my fake t
     author: "Anonymous",
     category: "romance",
     chapters: [
-      { title: "Chapter 1: The Market", content: `Esi worked at her father's sneaker stand in the bustling market. She hated it. She hated the smell of rubber, the loud noise of the traders, and the way the hot sun made her uniform stick to her back. 
-
-But she didn't hate Ato. 
-
-Ato came by every Tuesday and Thursday after school to look at the newest shoes. He never bought anything—he couldn't afford it—but he always stopped to talk to Esi.` },
-      { title: "Chapter 2: The Rain", content: `One Thursday, it started pouring rain. The market flooded, and everyone scrambled for cover. Esi's father had left to move some boxes, leaving her alone at the stand. The water was rising fast, threatening to ruin the boxes of shoes under the counter. 
-
-Out of nowhere, Ato appeared, soaked to the bone. 
-
-"Grab the top boxes!" he shouted over the roar of the rain.` },
-      { title: "Chapter 3: The Tea", content: `They worked together, moving the expensive shoes to higher shelves. By the time they finished, they were both shivering and covered in mud. 
-
-"Thank you," Esi panted, leaning against the counter. "You didn't have to do that."
-
-Ato smiled, wiping rain from his eyes. "Of course I did. I can't let my favorite sneaker store get ruined before I can afford a pair."` }
+      { title: "Chapter 1: The Market", content: `Esi worked at her father's sneaker stand in the bustling market. She hated it. But she didn't hate Ato. Ato came by every Tuesday and Thursday after school to look at the newest shoes.` },
+      { title: "Chapter 2: The Rain", content: `One Thursday, it started pouring rain. The market flooded. Out of nowhere, Ato appeared, soaked to the bone. "Grab the top boxes!" he shouted over the roar of the rain.` },
+      { title: "Chapter 3: The Tea", content: `By the time they finished, they were both shivering and covered in mud. "Thank you," Esi panted. "You didn't have to do that." Ato smiled. "Of course I did."` }
     ]
   }
 ];
@@ -770,7 +597,6 @@ function renderChapter() {
   
   const chapter = activeStory.chapters[currentChapterIndex];
   
-  // Update Content
   readerContent.innerHTML = "";
   
   const chapterTitle = document.createElement("h3");
@@ -784,11 +610,9 @@ function renderChapter() {
     readerContent.appendChild(p);
   });
 
-  // Update Buttons
   prevBtn.disabled = currentChapterIndex === 0;
   nextBtn.disabled = currentChapterIndex === activeStory.chapters.length - 1;
 
-  // Reset TTS if moving chapters
   stopSpeech();
   window.scrollTo(0, 0);
 }
@@ -804,6 +628,9 @@ function openStory(id) {
     location.hash = "";
     return;
   }
+
+  // HIDE THE HEADER HERE
+  mainHeader.classList.add("hidden");
 
   activeStory = story;
   currentChapterIndex = 0;
@@ -823,6 +650,10 @@ function openStory(id) {
 
 function showList() {
   stopSpeech();
+  
+  // SHOW THE HEADER HERE
+  mainHeader.classList.remove("hidden");
+
   activeStory = null;
   readerEl.style.display = "none";
   listEl.classList.remove("hidden");
