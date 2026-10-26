@@ -187,7 +187,6 @@
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="romance">Romance</button>
     <button class="filter-btn" data-filter="normal">Normal</button>
-    <!-- NEW MOVIES FILTER -->
     <button class="filter-btn" data-filter="movies">Movies</button>
   </div>
 </header>
@@ -271,219 +270,240 @@ listenBtn.addEventListener('click', () => {
   }
 });
 
-// --- HELPER FUNCTION FOR MASSIVE NOVELS ---
-function createLongStory(id, title, author, category, totalChapters, firstChapterText) {
-  const chapters = [];
-  for (let i = 1; i <= totalChapters; i++) {
-    chapters.push({
-      title: `Chapter ${i}`,
-      content: i === 1 ? firstChapterText : `This is Chapter ${i} of ${title}.\n\n(Note: Since a real novel of ${totalChapters} chapters would be thousands of pages long, this is placeholder text to show the structure. You can edit your index.html file on GitHub and replace this text with your actual story!)`
-    });
-  }
-  return { id, title, author, category, chapters };
-}
-
 // --- STORY DATA ---
 const stories = [
-  // --- MOVIE NOVELIZATIONS ---
-  createLongStory(
-    "cinderella",
-    "Cinderella",
-    "Disney",
-    "movies",
-    10,
-    `Once upon a time, in a faraway kingdom, there lived a kind and gentle girl named Ella. She lived in a beautiful manor with her loving parents. But tragedy struck, and soon, Ella was left in the care of her cruel stepmother and two jealous stepsisters.
-
-They stripped her of her fine clothes, forced her to work day and night, and covered her in ashes. They mocked her and called her Cinderella.
-
-But Cinderella never lost her kindness. She kept a small, brave mouse named Gus as her friend and dreamed of a life beyond the dusty attic.
-
-One day, the King announced a grand ball at the palace. Every eligible maiden in the land was invited, including Cinderella. But her stepmother forbade her to go, tearing her mother's old dress to shreds. 
-
-Heartbroken, Cinderella ran to the garden, crying. Suddenly, the air shimmered with golden light. A beautiful woman appeared, surrounded by sparkles. 
-
-"I am your Fairy Godmother," she said softly. "And you, my dear, shall go to the ball."`
-  ),
-  createLongStory(
-    "frozen",
-    "Frozen",
-    "Disney",
-    "movies",
-    12,
-    `The kingdom of Arendelle was a place of fjords, mountains, and deep, icy secrets. Princess Elsa possessed a magical power—the ability to create ice and snow with a single touch. But as a child, she accidentally hurt her younger sister, Anna. 
-
-Fearing her powers, their parents locked the castle gates. Elsa isolated herself, wearing gloves to hide her magic, while Anna grew up lonely, not remembering why her sister pushed her away.
-
-Years later, on the day of Elsa's coronation, the castle gates were finally opened. Anna was thrilled, dreaming of finding true love. But during a heated argument, Elsa's emotions got the best of her. She accidentally unleashed a frozen spell, plunging the entire kingdom into an eternal winter.
-
-Terrified of what she had done, Elsa fled to the North Mountain. Anna, determined to save her sister and the kingdom, set off into the blizzard with a rugged ice harvester named Kristoff and his loyal reindeer, Sven.`
-  ),
-  createLongStory(
-    "moana",
-    "Moana",
-    "Disney",
-    "movies",
-    15,
-    `The ocean was always calling to Moana. From the moment she was a toddler, the water seemed to part for her, inviting her in. But her father, the Chief of the island of Motunui, forbade anyone from sailing beyond the reef. The ocean was dangerous, he said.
-
-Moana grew up learning the ways of her people, but her heart ached for the horizon. Then, the island began to die. The fish disappeared, the coconuts turned black, and the lush vegetation wilted.
-
-Moana discovered a dark secret: long ago, the demigod Maui stole the heart of Te Fiti, the goddess of life. Without it, a slow death was spreading across the ocean. 
-
-Guided by her eccentric grandmother, Moana learned that the ocean had chosen her. She packed a canoe, set sail past the reef, and embarked on a daring journey to find Maui, return the heart, and save her people.`
-  ),
-  createLongStory(
-    "the-incredibles",
-    "The Incredibles",
-    "Disney/Pixar",
-    "movies",
-    10,
-    `In a world where superheroes were once celebrated, they are now forced into hiding. After a series of lawsuits ruined their reputation, the government initiated the Superhero Relocation Program. 
-
-Bob Parr, formerly known as the powerful Mr. Incredible, now works a boring desk job at an insurance company. His wife, Helen (formerly Elastigirl), stays at home to raise their three children: Violet, who can turn invisible; Dash, who is impossibly fast; and baby Jack-Jack.
-
-Bob misses the glory days. He sneaks out with his friend Lucius (Frozone) to fight crime in secret, disobeying the law. 
-
-One day, Bob receives a mysterious message from a woman named Mirage. She offers him a secret, high-paying job on a remote island. But when Bob arrives, he discovers a dangerous plot orchestrated by an old, resentful fan. Now, the Parr family must come out of hiding and learn to fight together.`
-  ),
-  createLongStory(
-    "paw-patrol",
-    "Paw Patrol",
-    "Nickelodeon",
-    "movies",
-    8,
-    `In the bustling town of Adventure Bay, there was always someone who needed help. Whether it was a kitten stuck in a tree or a train stuck on a broken bridge, the citizens knew exactly who to call: The Paw Patrol.
-
-Led by a ten-year-old boy named Ryder, the Paw Patrol was a team of search-and-rescue dogs, each with a unique job and a high-tech vehicle. 
-
-Chase was the police pup, Marshall was the clumsy but brave fire pup, Skye flew the helicopter, Rubble drove the bulldozer, Rocky recycled, and Zuma handled the water rescues.
-
-But today, a massive storm was brewing on the horizon. The Mayor called Ryder with an emergency: the Adventure Bay lighthouse was struck by lightning, and the beacon was broken. Without the light, ships would crash into the rocky shores at night! 
-
-"Ryder, we need to fix the lighthouse!" Chase barked. 
-
-"No job is too big, no pup is too small!" Ryder declared. "Paw Patrol, to the Lookout!"`
-  ),
-
-  // --- EXISTING MASSIVE NOVELS ---
-  createLongStory(
-    "the-ceos-secret",
-    "The CEO's Secret",
-    "Anonymous",
-    "romance",
-    32,
-    `The rain hammered against the glass windows of the high-rise office. Amara stood nervously outside the CEO's door, clutching the file that would determine her fate. She had only been an intern for three weeks, and she was already being called into the lion's den.
-
-Taking a deep breath, she knocked. A deep voice from inside said, "Come in."
-
-She pushed the door open. Sitting behind the massive mahogany desk was Kwame Adu, the youngest billionaire in the country. He didn't look up from his laptop. "You're late, Miss Amara."
-
-"I'm sorry, sir. The traffic—"
-
-"I don't care about the traffic," he said, finally looking up. His eyes were dark, piercing. "I care about results. You found a mistake in the merger contract. Tell me how you did it."`
-  ),
-  createLongStory(
-    "haunted-dormitory",
-    "The Haunted Dormitory",
-    "Anonymous",
-    "normal",
-    40,
-    `No one had slept in Room 404 for over a decade. The school had boarded up the windows, but the whispers still echoed through the halls at midnight. 
+  {
+    id: "haunted-dormitory",
+    title: "The Haunted Dormitory",
+    author: "Anonymous",
+    category: "normal",
+    chapters: [
+      { title: "Chapter 1: The Warning", content: `No one had slept in Room 404 for over a decade. The school had boarded up the windows, but the whispers still echoed through the halls at midnight. 
 
 When the new students arrived, they were warned: never go to the fourth floor. 
 
-But Mensah didn't believe in ghosts. He needed a quiet place to study for his final exams. Sneaking past the night watchman was easy. Finding the door to Room 404 unlocked was even easier.
-
-He stepped inside. The room smelled of old wood and dust. He set up his books on an old desk. But as the clock struck midnight, he heard a sound. 
+But Mensah didn't believe in ghosts. He needed a quiet place to study for his final exams. Sneaking past the night watchman was easy. Finding the door to Room 404 unlocked was even easier.` },
+      { title: "Chapter 2: The Wardrobe", content: `He stepped inside. The room smelled of old wood and dust. He set up his books on an old desk. But as the clock struck midnight, he heard a sound. 
 
 Scratch. Scratch. Scratch.
 
-It was coming from inside the wardrobe.`
-  ),
-  createLongStory(
-    "the-lost-city",
-    "The Lost City",
-    "Anonymous",
-    "normal",
-    50,
-    `The map was drawn in blood on a piece of old parchment. Professor Mensah said it led to a city buried beneath the Sahara, a place that defied all history books. 
+It was coming from inside the wardrobe. Mensah's heart began to pound. He slowly stood up and walked toward the heavy wooden doors.` },
+      { title: "Chapter 3: The Mirror", content: `He grabbed the handle and pulled. The door creaked open, revealing nothing but old, dusty clothes and a single mirror. 
 
-Our expedition team had no idea we were walking into a nightmare. There were five of us: the Professor, two local guides, my best friend Kofi, and me. 
+Mensah let out a breath he didn't know he was holding. "Just my imagination," he whispered.
 
-On the third day, the sandstorm hit. We lost the guides. We lost our camels. We were left with nothing but the clothes on our backs and the map. 
+But then, he looked in the mirror. His reflection was smiling. But Mensah wasn't.` },
+      { title: "Chapter 4: The Whisper", content: `Mensah stumbled backward, his heart hammering against his ribs. He rubbed his eyes, and when he looked back, his reflection was normal again—pale and terrified.
 
-Then, through the blinding dust, we saw them. Massive stone pillars, carved with eyes that seemed to follow us. We had found the city. But the city was not empty.`
-  ),
-  createLongStory(
-    "love-in-the-time-of-war",
-    "Love in the Time of War",
-    "Anonymous",
-    "romance",
-    58,
-    `The sirens blared across the city, a sound they had all grown terrifyingly used to. Kofi grabbed Maya's hand, pulling her into the underground bunker just as the first explosion shook the earth.
+He grabbed his books, ready to run, but the door to the hallway slammed shut on its own. 
 
-They sat huddled in the dark, the ground trembling beneath them. Maya was crying. 
+"Stay," a voice whispered from the shadows. It sounded like a young girl. "Please, don't leave me in the dark."` }
+    ]
+  },
+  {
+    id: "cinderella",
+    title: "Cinderella",
+    author: "Disney Novel",
+    category: "movies",
+    chapters: [
+      { title: "Chapter 1: The Ashes", content: `Once upon a time, in a faraway kingdom, there lived a kind and gentle girl named Ella. She lived in a beautiful manor with her loving parents. But tragedy struck, and soon, Ella was left in the care of her cruel stepmother and two jealous stepsisters.
 
-"Hey," Kofi whispered, wiping a tear from her cheek. "Look at me. We're going to be okay."
+They stripped her of her fine clothes, forced her to work day and night, and covered her in ashes. They mocked her and called her Cinderella.` },
+      { title: "Chapter 2: The Royal Decree", content: `One day, the King announced a grand ball at the palace. Every eligible maiden in the land was invited, including Cinderella. 
 
-"How do you know?" she sobbed.
+She worked for weeks to fix her mother's old dress. But her stepsisters, jealous of her beauty, tore it to shreds before she could leave. 
 
-"Because I promised you I'd get you out of this city, didn't I?" He pulled a crumpled train ticket from his pocket. "I bought these three months ago. Two tickets to the border. We leave at dawn, before the sun comes up."
+Heartbroken, Cinderella ran to the garden, crying in the dirt.` },
+      { title: "Chapter 3: Magic", content: `Suddenly, the air shimmered with golden light. A beautiful woman appeared, surrounded by sparkles. 
 
-Maya stared at the tickets. "Kofi... this costs a fortune. How did you..."
+"I am your Fairy Godmother," she said softly. "And you, my dear, shall go to the ball."
 
-"I'd do anything for you, Maya. Anything."`
-  ),
-  createLongStory(
-    "whispers-of-the-past",
-    "Whispers of the Past",
-    "Anonymous",
-    "romance",
-    35,
-    `Efua had always felt like a ghost in her own life. When she moved back to her grandmother's old house in the village, she expected peace and quiet. Instead, she found a hidden diary in the attic. 
+With a wave of her wand, a pumpkin became a golden carriage, mice became horses, and Cinderella's rags transformed into a breathtaking gown of glass and silk.
 
-The diary belonged to a girl named Araba, who lived there fifty years ago. As Efua read the pages, she realized Araba's story was terrifyingly similar to her own. Same heartbreak. Same lost love.
+"But remember," the Fairy Godmother warned. "The magic ends at the stroke of midnight."` },
+      { title: "Chapter 4: The Prince", content: `When Cinderella walked into the ballroom, the entire room stopped. She was the most beautiful sight anyone had ever seen. 
 
-But the last page of the diary sent a chill down Efua's spine. It was a warning, written in frantic script: "He is coming back. Don't let him in."`
-  ),
-  createLongStory(
-    "the-last-survivor",
-    "The Last Survivor",
-    "Anonymous",
-    "normal",
-    45,
-    `The year was 2099. The world above was a toxic wasteland. 
+Prince Charming, who had been bored all evening, immediately walked over to her. "May I have this dance?" he asked, his eyes locked on hers.
 
-Kofi was one of the few remaining humans, living in the underground bunker known as Sector 4. For ten years, he had followed the rules: don't go to the surface, don't ask questions, and trust the Elders.
+They danced all night, laughing and talking as if they had known each other forever. Cinderella forgot all about her stepmother and the ashes. But then, the clock began to chime.` }
+    ]
+  },
+  {
+    id: "the-ceos-secret",
+    title: "The CEO's Secret",
+    author: "Romance AI",
+    category: "romance",
+    chapters: [
+      { title: "Chapter 1: The Intern", content: `The rain hammered against the glass windows of the high-rise office. Amara stood nervously outside the CEO's door, clutching the file that would determine her fate. 
 
-But when a supply drone crashes into the bunker's ventilation shaft, Kofi finds a message hidden inside. It's a map, leading to a place called "Sanctuary." 
+She pushed the door open. Sitting behind the massive desk was Kwame Adu, the youngest billionaire in the country. 
 
-The problem? Sanctuary is rumored to be a myth. And the Elders will kill anyone who tries to leave.`
-  ),
-  createLongStory(
-    "blood-on-the-campus",
-    "Blood on the Campus",
-    "Anonymous",
-    "normal",
-    30,
-    `It was supposed to be a normal Friday night at St. Mary's University. But when the star athlete, David, was found unconscious in the locker room, the entire campus went into lockdown.
+"You're late, Miss Amara," he said, his eyes dark and piercing. "Tell me how you found the mistake in the merger contract."` },
+      { title: "Chapter 2: The Deal", content: `Amara swallowed hard. "I reviewed the numbers three times, sir. The error was hidden in the third column."
 
-Amara, a journalism student, knew something was wrong. The police said it was an accident, but she saw the bruises on David's arms. 
+Kwame leaned back in his chair. "Good. You're hired. But I don't just need an assistant. I need someone who can keep a secret."
 
-Determined to find the truth, Amara started digging. But the deeper she went, the more she realized that everyone—from the coach to the Dean—was hiding something. And someone was willing to kill to keep the secret buried.`
-  ),
-  createLongStory(
-    "the-billionaires-betrayal",
-    "The Billionaire's Betrayal",
-    "Anonymous",
-    "romance",
-    50,
-    `Nana had signed the contract in a moment of desperation. Ten years of marriage to a man she barely knew, in exchange for saving her father's company.
+He slid a non-disclosure agreement across the desk. It was fifty pages thick.` },
+      { title: "Chapter 3: The Late Night", content: `For the next three weeks, Amara barely slept. Kwame was ruthless, demanding, and incredibly brilliant. 
 
-Kwame was cold, ruthless, and obsessively private. He made it clear from day one: this was a business arrangement, not a romance. No feelings allowed.
+One night, at 2:00 AM, she found him asleep at his desk. He looked different without his cold glare. Peaceful. Vulnerable.
 
-But when a mysterious woman from Kwame's past shows up at their doorstep, Nana realizes her husband is hiding a dark secret. And the more she uncovers, the more she realizes that her fake husband might actually be falling for her... if he can survive the demons of his past.`
-  )
+She gently placed a blanket over his shoulders. As she turned to leave, his hand shot out and grabbed her wrist. "Don't go," he murmured, still half-asleep.` },
+      { title: "Chapter 4: The Ex", content: `The next morning, Kwame was back to his cold self. But before Amara could process what had happened, a woman stormed into the office.
+
+She was tall, elegant, and furious. "Kwame! You think you can hide from me?" 
+
+Kwame stood up, his face paling. "Amara, leave the room. Now."
+
+But Amara saw the look in his eyes. It wasn't anger. It was fear. And she wasn't going to leave him.` }
+    ]
+  },
+  {
+    id: "frozen",
+    title: "Frozen",
+    author: "Disney Novel",
+    category: "movies",
+    chapters: [
+      { title: "Chapter 1: The Secret", content: `The kingdom of Arendelle was a place of fjords, mountains, and deep, icy secrets. Princess Elsa possessed a magical power—the ability to create ice and snow with a single touch. 
+
+Fearing her powers, her parents locked the castle gates. Elsa isolated herself, while her sister Anna grew up lonely, not remembering why her sister pushed her away.` },
+      { title: "Chapter 2: The Coronation", content: `Years later, on the day of Elsa's coronation, the castle gates were finally opened. Anna was thrilled, dreaming of finding true love in the village. 
+
+But during the celebration, Anna asked Elsa for her blessing to marry a man she had just met. Elsa refused, and in her anger, her powers erupted. Ice shot from her hands, plunging the entire kingdom into an eternal winter.
+
+Terrified, Elsa fled into the mountains.` },
+      { title: "Chapter 3: The Journey", content: `Anna refused to let her sister face the cold alone. She left the kingdom in the hands of Hans, a handsome prince, and set off into the blizzard.
+
+She soon met Kristoff, a rugged ice harvester, and his loyal reindeer, Sven. Together, they trekked up the North Mountain to find Elsa and bring back summer.` },
+      { title: "Chapter 4: Let It Go", content: `High in the mountains, Elsa finally let go of her fear. She created a magnificent ice palace and sang to the sky, embracing her powers for the first time. 
+
+"I'm never going back," she whispered. "The past is in the past."
+
+But her peace was broken when Anna arrived, pleading with her to come home. In a panic, Elsa accidentally struck Anna in the heart with a blast of ice.` }
+    ]
+  },
+  {
+    id: "moana",
+    title: "Moana",
+    author: "Disney Novel",
+    category: "movies",
+    chapters: [
+      { title: "Chapter 1: The Call", content: `The ocean was always calling to Moana. From the moment she was a toddler, the water seemed to part for her, inviting her in. But her father, the Chief of the island of Motunui, forbade anyone from sailing beyond the reef. 
+
+Moana grew up learning the ways of her people, but her heart ached for the horizon. Then, the island began to die.` },
+      { title: "Chapter 2: The Legend", content: `The fish disappeared, the coconuts turned black, and the lush vegetation wilted. 
+
+Moana discovered a dark secret from her grandmother: long ago, the demigod Maui stole the heart of Te Fiti, the goddess of life. Without it, a slow death was spreading across the ocean.` },
+      { title: "Chapter 3: The Voyage", content: `Guided by her eccentric grandmother, Moana learned that the ocean had chosen her. 
+
+She packed a canoe, set sail past the reef, and embarked on a daring journey. The ocean was rough, the waves towering, but Moana did not look back. She was going to find Maui, return the heart, and save her people.` }
+    ]
+  },
+  {
+    id: "the-billionaires-betrayal",
+    title: "The Billionaire's Betrayal",
+    author: "Romance AI",
+    category: "romance",
+    chapters: [
+      { title: "Chapter 1: The Contract", content: `Nana had signed the contract in a moment of desperation. Ten years of marriage to a man she barely knew, in exchange for saving her father's company.
+
+Kwame was cold, ruthless, and obsessively private. He made it clear from day one: this was a business arrangement, not a romance. No feelings allowed.` },
+      { title: "Chapter 2: The Rules", content: `"Rule number one," Kwame said, adjusting his tie. "We sleep in separate rooms. Rule number two: you will attend events with me, smile, and say nothing. Rule number three: do not ask about my past."
+
+Nana nodded. She could play by the rules. But the first time he introduced her to his board of directors, she realized Kwame wasn't just hiding his past. He was hiding a deep, painful scar.` },
+      { title: "Chapter 3: The Ex", content: `When a mysterious woman from Kwame's past shows up at their doorstep, Nana realizes her fake husband is hiding a dark secret. 
+
+The woman, Sarah, held a thick envelope. "He ruined my life," Sarah said. "And if you stay with him, he will ruin yours too."
+
+Nana stared at the envelope, her heart racing. Should she open it?` }
+    ]
+  },
+  {
+    id: "the-lost-city",
+    title: "The Lost City",
+    author: "Adventure AI",
+    category: "normal",
+    chapters: [
+      { title: "Chapter 1: The Map", content: `The map was drawn in blood on a piece of old parchment. Professor Mensah said it led to a city buried beneath the Sahara, a place that defied all history books. 
+
+Our expedition team had no idea we were walking into a nightmare. There were five of us: the Professor, two local guides, my best friend Kofi, and me.` },
+      { title: "Chapter 2: The Sandstorm", content: `On the third day, the sandstorm hit. It was a wall of orange death that swallowed the sun. 
+
+We lost the guides. We lost our camels. We were left with nothing but the clothes on our backs and the map. 
+
+"We have to keep moving!" the Professor screamed over the roaring wind. We tied ourselves together with rope and pushed forward blindly.` },
+      { title: "Chapter 3: The Pillars", content: `Then, through the blinding dust, we saw them. 
+
+Massive stone pillars, fifty feet tall, carved with eyes that seemed to follow us. We had found the city. 
+
+Kofi grabbed my arm. "Look," he whispered. 
+
+I looked down at the sand. There were footprints. Fresh footprints. We were not alone.` }
+    ]
+  },
+  {
+    id: "the-incredibles",
+    title: "The Incredibles",
+    author: "Disney Novel",
+    category: "movies",
+    chapters: [
+      { title: "Chapter 1: The Relocation", content: `In a world where superheroes were once celebrated, they are now forced into hiding. 
+
+Bob Parr, formerly known as the powerful Mr. Incredible, now works a boring desk job. His wife, Helen (Elastigirl), stays at home to raise their three children: Violet, Dash, and baby Jack-Jack.` },
+      { title: "Chapter 2: The Secret Job", content: `Bob misses the glory days. He sneaks out with his friend Lucius to fight crime in secret, disobeying the law. 
+
+One day, Bob receives a mysterious message from a woman named Mirage. She offers him a secret, high-paying job on a remote island. 
+
+Unable to resist the thrill, Bob accepts, lying to his wife about where he is going.` },
+      { title: "Chapter 3: Syndrome", content: `When Bob arrives on the island, he discovers a dangerous plot. The island is run by Syndrome, a tech genius who idolized Mr. Incredible as a child but grew to hate him.
+
+Syndrome traps Bob, determined to destroy the hero who rejected him. But he forgot one thing: Bob is not just a hero. He is a father.` }
+    ]
+  },
+  {
+    id: "paw-patrol",
+    title: "Paw Patrol",
+    author: "Nickelodeon Novel",
+    category: "movies",
+    chapters: [
+      { title: "Chapter 1: The Team", content: `In the bustling town of Adventure Bay, there was always someone who needed help. 
+
+Led by a ten-year-old boy named Ryder, the Paw Patrol was a team of search-and-rescue dogs, each with a unique job. Chase was the police pup, Marshall was the fire pup, Skye flew the helicopter, and Rubble drove the bulldozer.` },
+      { title: "Chapter 2: The Storm", content: `Today, a massive storm was brewing on the horizon. 
+
+The Mayor called Ryder with an emergency: the Adventure Bay lighthouse was struck by lightning, and the beacon was broken. Without the light, ships would crash into the rocky shores at night! 
+
+"Ryder, we need to fix the lighthouse!" Chase barked.` },
+      { title: "Chapter 3: To The Lookout", content: `"No job is too big, no pup is too small!" Ryder declared into his pup-pad. 
+
+"Paw Patrol, to the Lookout!"
+
+The sirens blared at the Lookout tower. The pups slid down the slide, jumped into their vehicles, and raced toward the coast to save the ships.` }
+    ]
+  },
+  {
+    id: "whispers-of-the-past",
+    title: "Whispers of the Past",
+    author: "Romance AI",
+    category: "romance",
+    chapters: [
+      { title: "Chapter 1: The Diary", content: `Efua had always felt like a ghost in her own life. When she moved back to her grandmother's old house in the village, she expected peace and quiet. 
+
+Instead, she found a hidden diary in the attic. 
+
+As Efua read the pages, she realized the author's story was terrifyingly similar to her own. Same heartbreak. Same lost love.` },
+      { title: "Chapter 2: The Warning", content: `The diary belonged to a girl named Araba, who lived there fifty years ago. 
+
+But the last page of the diary sent a chill down Efua's spine. It was a warning, written in frantic, jagged script: 
+
+"He is coming back. Don't let him in."` },
+      { title: "Chapter 3: The Knock", content: `That night, as the rain poured down, there was a loud knock on the front door. 
+
+Efua froze. The village was a mile away. No one visited this house. 
+
+She looked through the peephole. A man stood in the rain, holding a suitcase. He looked exactly like the man Araba had described in the diary.` }
+    ]
+  }
 ];
 
 // Colors for DARK mode
